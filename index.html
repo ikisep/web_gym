@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101012">
+  <meta name="description" content="FitPlan - Personal Gym Planner untuk membangun kebiasaan latihan.">
+  <title>FitPlan — Personal Gym Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard"><span class="brand-icon">✚</span><span>Fit<span class="red">Plan</span><small>TRAIN. TRACK. GROW.</small></span></a>
+      <nav class="side-nav" aria-label="Navigasi utama">
+        <a class="nav-link active" href="#dashboard" data-page="dashboard"><span>⌂</span>Dashboard</a>
+        <a class="nav-link" href="#jadwal" data-page="jadwal"><span>▦</span>Jadwal Latihan</a>
+        <a class="nav-link" href="#progress" data-page="progress"><span>▥</span>Progress</a>
+        <a class="nav-link" href="#catatan" data-page="catatan"><span>▤</span>Catatan</a>
+        <a class="nav-link" href="#nutrisi" data-page="nutrisi"><span>◉</span>Nutrisi</a>
+        <a class="nav-link" href="#pengaturan" data-page="pengaturan"><span>⚙</span>Pengaturan</a>
+      </nav>
+      <div class="sidebar-quote"><div class="quote-dumbbell">🏋</div><strong>Disiplin hari ini,<br>hasil esok hari.</strong><span>Small steps. Stronger you.</span></div>
+      <div class="sidebar-bottom"><span>● Data tersimpan di perangkat</span><button id="themeToggle" class="theme-toggle" type="button">☾ Mode Gelap</button></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu icon-btn" id="menuToggle" aria-label="Buka menu">☰</button>
+        <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Cari latihan, catatan..."></div>
+        <div class="top-user"><span class="status-dot"></span><span id="todayLabel"></span><div class="avatar">R</div><strong id="userNameTop">Rizki</strong></div>
+      </header>
+
+      <section class="page active" id="page-dashboard">
+        <section class="hero">
+          <div class="hero-copy"><span class="eyebrow">PERSONAL FITNESS JOURNEY</span><h1>Halo, <span class="red" id="greetingName">Rizki</span>! 💪</h1><p>Bangun kebiasaan, tambah kekuatan, dan capai targetmu satu latihan dalam satu waktu.</p><a class="btn btn-primary" href="#jadwal">Lihat Jadwal <span>→</span></a></div>
+          <div class="hero-art" aria-hidden="true"><div class="hero-glow"></div><div class="hero-figure">FIT<br><span>STRONG</span></div></div>
+          <div class="hero-watermark">NO<br>EXCUSES.</div>
+        </section>
+
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-icon red-bg">▦</div><div><span>Jadwal / Minggu</span><strong>3 <small>hari</small></strong><em>Senin · Rabu · Jumat</em></div></article>
+          <article class="stat-card"><div class="stat-icon orange-bg">♨</div><div><span>Total Sesi Selesai</span><strong id="totalSessions">0</strong><em>Terus tingkatkan!</em></div></article>
+          <article class="stat-card"><div class="stat-icon green-bg">⚖</div><div><span>Berat Terakhir</span><strong id="latestWeight">65 <small>kg</small></strong><em id="weightDate">Tambahkan catatan berat</em></div></article>
+          <article class="stat-card"><div class="stat-icon gold-bg">◎</div><div><span>Target Mingguan</span><strong id="weeklyTarget">0<small>/3</small></strong><em id="weeklyStatus">Mulai sesi pertamamu</em></div></article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel schedule-panel">
+            <div class="panel-heading"><div><span class="panel-icon">▦</span><h2>Jadwal Mingguan</h2></div><a href="#jadwal">Lihat semua →</a></div>
+            <div class="week-cards" id="dashboardSchedule"></div>
+          </article>
+          <article class="panel timer-panel">
+            <div class="panel-heading"><div><span class="panel-icon">◷</span><h2>Timer Istirahat</h2></div><span class="live-pill">READY</span></div>
+            <div class="timer-ring" id="timerRing"><div><strong id="timerDisplay">01:30</strong><small>WAKTU ISTIRAHAT</small></div></div>
+            <div class="timer-controls"><button class="btn btn-primary" id="timerStart">▶ Mulai</button><button class="btn btn-ghost" id="timerReset">↺ Reset</button></div>
+            <div class="timer-presets"><button data-seconds="60">60 dtk</button><button class="selected" data-seconds="90">90 dtk</button><button data-seconds="120">120 dtk</button></div>
+          </article>
+          <article class="panel today-panel">
+            <div class="panel-heading"><div><span class="panel-icon">⚡</span><h2>Latihan Hari Ini</h2></div><span class="live-pill" id="todayWorkoutStatus">JADWAL</span></div>
+            <div id="todayWorkout"></div>
+          </article>
+          <article class="panel nutrition-panel">
+            <div class="panel-heading"><div><span class="panel-icon">◉</span><h2>Nutrisi Hari Ini</h2></div><a href="#nutrisi">Atur →</a></div>
+            <div class="calorie-summary"><div class="calorie-ring" id="calorieRing"><strong id="caloriePercent">0%</strong></div><div><span>Kalori masuk</span><strong id="calorieCount">0 <small>/ 2.400 kkal</small></strong><em id="calorieRemaining">2.400 kkal tersisa</em></div></div>
+            <div class="macro-list" id="dashboardMacros"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="page-jadwal">
+        <div class="page-title"><div><span class="eyebrow">PLAN YOUR WORKOUT</span><h1>Jadwal <span class="red">Latihan</span></h1><p>Program 3 hari untuk membangun massa otot secara bertahap.</p></div><button class="btn btn-primary" id="resetWorkout">Reset Checklist</button></div>
+        <div class="schedule-full" id="fullSchedule"></div>
+        <article class="panel tip-panel"><span class="panel-icon">✦</span><div><h3>Tips progresif overload</h3><p>Catat beban dan repetisi. Jika semua set sudah terasa mudah dengan teknik yang baik, naikkan beban sedikit demi sedikit.</p></div></article>
+      </section>
+
+      <section class="page" id="page-progress">
+        <div class="page-title"><div><span class="eyebrow">YOUR JOURNEY</span><h1>Progress <span class="red">Tracker</span></h1><p>Pantau perkembangan berat badan dan konsistensi latihanmu.</p></div></div>
+        <div class="progress-grid">
+          <article class="panel"><div class="panel-heading"><div><span class="panel-icon">⚖</span><h2>Berat Badan</h2></div><span class="live-pill">RIWAYAT</span></div><form id="weightForm" class="inline-form"><label>Berat (kg)<input id="weightInput" type="number" min="1" max="400" step="0.1" placeholder="Contoh: 65.5" required></label><label>Tanggal<input id="weightDateInput" type="date" required></label><button class="btn btn-primary" type="submit">+ Simpan</button></form><div class="chart-wrap"><canvas id="weightChart" height="220" aria-label="Grafik berat badan"></canvas></div><div id="weightHistory" class="history-list"></div></article>
+          <article class="panel"><div class="panel-heading"><div><span class="panel-icon">▥</span><h2>Ringkasan Latihan</h2></div></div><div class="big-progress"><strong id="progressSessions">0</strong><span>sesi latihan selesai</span></div><div class="progress-track"><span id="progressBar"></span></div><p class="muted" id="progressMessage">Setiap sesi adalah langkah menuju tujuanmu.</p><div class="milestone"><span>🎯</span><div><strong>Target mingguan</strong><p>3 sesi latihan per minggu</p></div><b id="milestoneValue">0 / 3</b></div></article>
+        </div>
+      </section>
+
+      <section class="page" id="page-catatan">
+        <div class="page-title"><div><span class="eyebrow">TRAINING JOURNAL</span><h1>Catatan <span class="red">Latihan</span></h1><p>Simpan hal penting dari setiap sesi latihan.</p></div></div>
+        <article class="panel note-compose"><form id="noteForm"><label>Judul catatan<input id="noteTitle" maxlength="70" placeholder="Contoh: Push day — progres bench press" required></label><label>Isi catatan<textarea id="noteBody" rows="4" placeholder="Tulis beban, repetisi, kondisi tubuh, atau evaluasi latihan..." required></textarea></label><div class="form-bottom"><input id="noteDate" type="date" required><button class="btn btn-primary" type="submit">Simpan Catatan</button></div></form></article>
+        <div class="notes-grid" id="notesList"></div>
+      </section>
+
+      <section class="page" id="page-nutrisi">
+        <div class="page-title"><div><span class="eyebrow">FUEL YOUR BODY</span><h1>Tracking <span class="red">Nutrisi</span></h1><p>Catat asupan harian untuk mendukung target massa otot.</p></div><button class="btn btn-ghost" id="resetNutrition">Reset Hari Ini</button></div>
+        <div class="nutrition-overview">
+          <article class="panel calorie-large"><span class="eyebrow">KALORI HARIAN</span><div class="calorie-ring large" id="nutritionRing"><strong id="nutritionPercent">0%</strong></div><h2 id="nutritionCalories">0 <small>/ 2.400 kkal</small></h2><p class="muted" id="nutritionRemaining">2.400 kkal tersisa</p></article>
+          <article class="panel macro-panel"><div class="panel-heading"><div><span class="panel-icon">◈</span><h2>Target Makro</h2></div></div><div id="macroProgress"></div></article>
+        </div>
+        <article class="panel food-form-panel"><div class="panel-heading"><div><span class="panel-icon">＋</span><h2>Tambah Asupan</h2></div></div><form id="foodForm" class="food-form"><label>Nama makanan<input id="foodName" placeholder="Contoh: Nasi, ayam, telur" required></label><label>Kalori (kkal)<input id="foodCalories" type="number" min="0" placeholder="450" required></label><label>Protein (g)<input id="foodProtein" type="number" min="0" placeholder="30" required></label><label>Karbo (g)<input id="foodCarbs" type="number" min="0" placeholder="50" required></label><label>Lemak (g)<input id="foodFat" type="number" min="0" placeholder="12" required></label><button class="btn btn-primary" type="submit">+ Tambah</button></form></article>
+        <article class="panel"><div class="panel-heading"><div><span class="panel-icon">☷</span><h2>Asupan Hari Ini</h2></div><span class="live-pill" id="foodCount">0 ITEM</span></div><div id="foodList" class="food-list"></div></article>
+        <p class="nutrition-disclaimer">Catatan: target 2.400 kkal dan makro adalah nilai awal contoh, bukan rekomendasi medis atau kebutuhan personal. Sesuaikan berdasarkan kebutuhan, aktivitas, dan perkembangan tubuh.</p>
+      </section>
+
+      <section class="page" id="page-pengaturan">
+        <div class="page-title"><div><span class="eyebrow">PERSONALIZE FITPLAN</span><h1>Pengaturan</h1><p>Sesuaikan aplikasi dengan kebutuhanmu.</p></div></div>
+        <article class="panel settings-panel"><form id="settingsForm"><label>Nama panggilan<input id="settingsName" maxlength="30" placeholder="Nama kamu"></label><label>Target kalori harian (kkal)<input id="settingsCalories" type="number" min="500" max="10000" required></label><label>Target protein (gram)<input id="settingsProtein" type="number" min="1" max="500" required></label><label>Target karbohidrat (gram)<input id="settingsCarbs" type="number" min="1" max="1000" required></label><label>Target lemak (gram)<input id="settingsFat" type="number" min="1" max="500" required></label><button class="btn btn-primary" type="submit">Simpan Pengaturan</button></form></article>
+        <article class="panel data-panel"><div><h3>Data aplikasi</h3><p class="muted">Data disimpan di LocalStorage browser pada perangkat ini.</p></div><div class="data-actions"><button class="btn btn-ghost" id="exportData">Export data JSON</button><button class="btn btn-danger" id="clearData">Hapus semua data</button></div></article>
+      </section>
+
+      <footer class="footer">FITPLAN <span>·</span> Konsisten lebih penting daripada sempurna.</footer>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="Navigasi mobile">
+    <a href="#dashboard" data-page="dashboard" class="active"><span>⌂</span>Home</a><a href="#jadwal" data-page="jadwal"><span>▦</span>Jadwal</a><a href="#progress" data-page="progress"><span>▥</span>Progress</a><a href="#catatan" data-page="catatan"><span>▤</span>Catatan</a><a href="#nutrisi" data-page="nutrisi"><span>◉</span>Nutrisi</a>
+  </nav>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
