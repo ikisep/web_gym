@@ -19,6 +19,7 @@
         <a class="nav-link active" href="#dashboard" data-page="dashboard"><span>⌂</span>Dashboard</a>
         <a class="nav-link" href="#jadwal" data-page="jadwal"><span>▦</span>Jadwal Latihan</a>
         <a class="nav-link" href="#progress" data-page="progress"><span>▥</span>Progress</a>
+        <a class="nav-link" href="#tutorial" data-page="tutorial"><span>▶</span>Tutorial Gym</a>
         <a class="nav-link" href="#catatan" data-page="catatan"><span>▤</span>Catatan</a>
         <a class="nav-link" href="#nutrisi" data-page="nutrisi"><span>◉</span>Nutrisi</a>
         <a class="nav-link" href="#pengaturan" data-page="pengaturan"><span>⚙</span>Pengaturan</a>
@@ -85,6 +86,25 @@
         </div>
       </section>
 
+      <section class="page" id="page-tutorial">
+        <div class="page-title"><div><span class="eyebrow">LEARN THE RIGHT FORM</span><h1>Tutorial <span class="red">Gerakan Gym</span></h1><p>Pelajari teknik gerakan lewat ilustrasi 3D bergerak dan video panduan.</p></div></div>
+        <article class="panel tutorial-hero">
+          <div><span class="live-pill">FITPLAN EXERCISE LIBRARY</span><h2>Teknik yang benar,<br><span class="red">progres lebih aman.</span></h2><p>Pilih gerakan untuk melihat otot yang dilatih, alat, langkah gerakan, kesalahan umum, dan video referensi.</p></div>
+          <img src="gym-tutorial-guide.png" alt="Ilustrasi 3D beberapa gerakan gym" loading="lazy">
+        </article>
+        <div class="tutorial-toolbar"><div class="tutorial-filters" id="tutorialFilters"><button class="selected" data-category="Semua">Semua</button><button data-category="Dada">Dada</button><button data-category="Punggung">Punggung</button><button data-category="Kaki">Kaki</button><button data-category="Bahu">Bahu</button><button data-category="Lengan">Lengan</button></div><input id="tutorialSearch" type="search" placeholder="Cari nama gerakan..."></div>
+        <div class="tutorial-grid" id="tutorialGrid"></div>
+        <p class="tutorial-disclaimer">Gunakan beban yang bisa dikontrol, lakukan pemanasan, dan hentikan gerakan jika terasa nyeri tajam. Ilustrasi 3D adalah panduan visual sederhana; utamakan teknik dan arahan pelatih bila tersedia.</p>
+      </section>
+
+      <div class="tutorial-modal" id="tutorialModal" aria-hidden="true">
+        <div class="tutorial-modal-backdrop" data-close-tutorial></div>
+        <article class="tutorial-detail panel" role="dialog" aria-modal="true" aria-labelledby="tutorialDetailTitle">
+          <button class="tutorial-close" type="button" data-close-tutorial aria-label="Tutup">×</button>
+          <div id="tutorialDetailContent"></div>
+        </article>
+      </div>
+
       <section class="page" id="page-catatan">
         <div class="page-title"><div><span class="eyebrow">TRAINING JOURNAL</span><h1>Catatan <span class="red">Latihan</span></h1><p>Simpan hal penting dari setiap sesi latihan.</p></div></div>
         <article class="panel note-compose"><form id="noteForm"><label>Judul catatan<input id="noteTitle" maxlength="70" placeholder="Contoh: Push day — progres bench press" required></label><label>Isi catatan<textarea id="noteBody" rows="4" placeholder="Tulis beban, repetisi, kondisi tubuh, atau evaluasi latihan..." required></textarea></label><div class="form-bottom"><input id="noteDate" type="date" required><button class="btn btn-primary" type="submit">Simpan Catatan</button></div></form></article>
@@ -112,7 +132,7 @@
     </main>
   </div>
   <nav class="mobile-nav" aria-label="Navigasi mobile">
-    <a href="#dashboard" data-page="dashboard" class="active"><span>⌂</span>Home</a><a href="#jadwal" data-page="jadwal"><span>▦</span>Jadwal</a><a href="#progress" data-page="progress"><span>▥</span>Progress</a><a href="#catatan" data-page="catatan"><span>▤</span>Catatan</a><a href="#nutrisi" data-page="nutrisi"><span>◉</span>Nutrisi</a>
+    <a href="#dashboard" data-page="dashboard" class="active"><span>⌂</span>Home</a><a href="#jadwal" data-page="jadwal"><span>▦</span>Jadwal</a><a href="#progress" data-page="progress"><span>▥</span>Progress</a><a href="#tutorial" data-page="tutorial"><span>▶</span>Tutorial</a><a href="#catatan" data-page="catatan"><span>▤</span>Catatan</a><a href="#nutrisi" data-page="nutrisi"><span>◉</span>Nutrisi</a>
   </nav>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
